@@ -105,7 +105,6 @@ uint32_t infoCallback(cmd *c) {
     Serial.println(GIT_COMMIT_HASH);
     Serial.printf("SDK: %s\n", ESP.getSdkVersion());
     Serial.println("MAC addr: " + String(WiFi.macAddress()));
-
     // https://github.com/espressif/arduino-esp32/blob/master/libraries/ESP32/examples/ChipID/GetChipID/GetChipID.ino
     // Serial.printf("Chip is %s (revision v%d)\n", ESP.getChipModel(), ESP.getChipRevision());
     // Serial.printf("Detected flash size: %d\n", ESP.getFlashChipSize());
@@ -121,6 +120,8 @@ uint32_t infoCallback(cmd *c) {
     } else {
         Serial.println("Wifi: not connected");
     }
+
+    Serial.println("Device: " + String(DEVICE_NAME));
 
     return true;
 }
@@ -238,20 +239,31 @@ uint32_t displayCallback(cmd *c) {
         if (tft.getLogging()) Serial.println("Display: Logging tft is ACTIVATED");
         else Serial.println("Display: Logging tft is DEACTIVATED");
     } else if (opt == "dump") {
-        String response = tft.getJSONLog(); // core/utils.h
-        Serial.println(response);
+        uint8_t binData[MAX_LOG_ENTRIES * MAX_LOG_SIZE];
+        size_t binSize = 0;
+
+        tft.getBinLog(binData, binSize);
+
+        Serial.println("Binary Dump:");
+        for (size_t i = 0; i < binSize; i++) {
+            if (i % 16 == 0) Serial.println();
+            // if (i % 16 == 0) Serial.printf("\n%04X: ", i);
+            Serial.printf("%02X ", binData[i]);
+        }
+        Serial.println("\n[End of Dump]");
     } else {
         Serial.println(
             "Display command accept:\n"
             "display start : Start Logging\n"
             "display stop  : Stop Logging\n"
-            "display status: get Logging state\n"
-            "display dump  : dumps the JSON object of the actual drawing"
+            "display status: Get Logging state\n"
+            "display dump  : Dumps binary log"
         );
         return false;
     }
     return true;
 }
+
 void createUtilCommands(SimpleCLI *cli) {
     cli->addCommand("uptime", uptimeCallback);
     cli->addCommand("date", dateCallback);
