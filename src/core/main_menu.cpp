@@ -6,8 +6,11 @@
 MainMenu::MainMenu() {
     _menuItems = {
         &wifiMenu,
+
+#if !defined(REMOVE_BLE_MENU)
         &bleMenu,
-#if !defined(LITE_VERSION)
+#endif
+#if !defined(REMOVE_ETHERNET_MENU)
         &ethernetMenu,
 #endif
 #if !defined(REMOVE_RF_MENU)
@@ -21,15 +24,16 @@ MainMenu::MainMenu() {
         &fmMenu,
 #endif
         &fileMenu,
-        &gpsMenu,
+
 #if !defined(REMOVE_NRF_MENU)
         &nrf24Menu,
 #endif
-#if !defined(LITE_VERSION)
+#if !defined(REMOVE_OTHERS_MENU)
+        &gpsMenu,
         &scriptsMenu,
-#endif
         &othersMenu,
         &clockMenu,
+#endif
         &connectMenu,
         &configMenu,
     };
