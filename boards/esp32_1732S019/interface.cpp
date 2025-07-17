@@ -20,7 +20,7 @@ IRAM_ATTR void checkPosition();
 // Power handler for battery detection
 #include <Wire.h>
 // #include <XPowersLib.h>
-XPowersPPM PPM;
+//XPowersPPM PPM;
 
 void _setup_gpio() {
 
