@@ -41,11 +41,11 @@ static const uint8_t SCK = 17;
 #define SEL_BTN ENCODER_KEY
 #define UP_BTN -1
 #define DW_BTN -1
-#define BK_BTN 38
+// #define BK_BTN 38
 #define BTN_ACT LOW
 
 #define RXLED 4
-#define LED 5
+#define LED 20
 #define LED_ON HIGH
 #define LED_OFF LOW
 
@@ -100,28 +100,8 @@ static const uint8_t SCK = 17;
 #define SPI_MISO_PIN 16
 #define SPI_SS_PIN 43
 
-// RGB LED
-
-#define HAS_RGB_LED 1
-#define RGB_LED 45
-#define LED_TYPE WS2812B
-#define LED_ORDER GRB
-#define LED_TYPE_IS_RGBW 0
-#define LED_COUNT 16
-
-#define USE_BQ25896
-
 // === I2C Grove ===
 #define GROVE_SDA SDA
 #define GROVE_SCL SCL
-
-// === IO EXPANDER (si on compte l'utiliser plus tard) ===
-#define USE_IO_EXPANDER
-#define IO_EXPANDER_AW9523
-#define IO_EXP_GPS 20
-#define IO_EXP_MIC 4
-#define IO_EXP_VIBRO 2
-#define IO_EXP_CC_RX 38
-#define IO_EXP_CC_TX 39
 
 #endif /* Pins_Arduino_h */
