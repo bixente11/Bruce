@@ -1,4 +1,4 @@
-ESP32 Display 1.9-inch 170*320 ESP32-1732S019
+ESP32 Display 1.9-inch 170*320 ESP32-1732S019 with rotary encoder
 
 
 ![Bruce Main Menu](./media/pictures/bruce_banner.jpg)
